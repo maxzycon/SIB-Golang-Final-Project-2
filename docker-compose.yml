@@ -3,7 +3,7 @@ version: "3"
 services:
   backend:
     build: .
-    image: golang-be-sib-fp2
+    image: golang-be-sib-fp-2
     restart: unless-stopped
     ports:
       - "8089:8082"
