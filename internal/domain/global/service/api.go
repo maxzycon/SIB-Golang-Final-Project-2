@@ -20,4 +20,10 @@ type GlobalService interface {
 	CreateComment(ctx context.Context, payload *dto.PayloadComment, user *authutil.UserClaims) (resp *dto.CommentCreteResponse, err error)
 	UpdateCommentById(ctx context.Context, id int, payload *dto.PayloadUpdateComment) (resp *dto.CommentUpdateResponse, err error)
 	DeleteCommentById(ctx context.Context, id int) (resp *int64, err error)
+
+	// ----- Social media
+	GetAllSocialMedia(ctx context.Context, user *authutil.UserClaims) (resp *dto.SocialMediaWrappper, err error)
+	CreateSocialMedia(ctx context.Context, payload *dto.PayloadSocialMedia, user *authutil.UserClaims) (resp *dto.SocialMediaCreteResponse, err error)
+	UpdateSocialMediaById(ctx context.Context, id int, payload *dto.PayloadUpdateSocialMedia) (resp *dto.SocialMediaUpdateResponse, err error)
+	DeleteSocialMediaById(ctx context.Context, id int) (resp *int64, err error)
 }

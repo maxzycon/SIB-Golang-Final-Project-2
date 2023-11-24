@@ -13,6 +13,9 @@ const (
 
 	CommentsBasePath   = "comments"
 	CommentsBaseIdPath = "comments/:id"
+
+	SocialMediasBasePath   = "socialmedias"
+	SocialMediasBaseIdPath = "socialmedias/:id"
 )
 
 type GlobalControllerParams struct {
@@ -50,4 +53,10 @@ func (pc *GlobalController) Init() {
 	pc.v1.Post(CommentsBasePath, pc.middleware.Protected([]uint{}), pc.handlerCreateComment)
 	pc.v1.Put(CommentsBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerUpdateComment)
 	pc.v1.Delete(CommentsBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerDeleteComment)
+
+	// ---- Socialmedias API
+	pc.v1.Get(SocialMediasBasePath, pc.middleware.Protected([]uint{}), pc.handlerGetAllSocialMedia)
+	pc.v1.Post(SocialMediasBasePath, pc.middleware.Protected([]uint{}), pc.handlerCreateSocialMedia)
+	pc.v1.Put(SocialMediasBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerUpdateSocialMedia)
+	pc.v1.Delete(SocialMediasBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerDeleteSocialMedia)
 }
