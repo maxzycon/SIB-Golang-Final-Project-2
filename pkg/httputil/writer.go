@@ -51,3 +51,9 @@ func WriteResponse(e *fiber.Ctx, param dto.ResponseParam) error {
 func BaseWriteResponse(e *fiber.Ctx, status int, payload interface{}) error {
 	return e.Status(status).JSON(payload)
 }
+
+func BaseMessageResponse(e *fiber.Ctx, message interface{}) error {
+	return e.Status(http.StatusOK).JSON(dto.BaseResponseMessage{
+		Message: message,
+	})
+}

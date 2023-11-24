@@ -8,8 +8,11 @@ import (
 )
 
 const (
-	todosBasePath   = "todos"
-	todosBaseIdPath = "todos/:id"
+	PhotosBasePath   = "photos"
+	PhotosBaseIdPath = "photos/:id"
+
+	CommentsBasePath   = "comments"
+	CommentsBaseIdPath = "comments/:id"
 )
 
 type GlobalControllerParams struct {
@@ -35,10 +38,16 @@ func New(params *GlobalControllerParams) *GlobalController {
 }
 
 func (pc *GlobalController) Init() {
-	// ---- Todos API
-	pc.v1.Get(todosBasePath, pc.handlerGetAllTodos)
-	pc.v1.Get(todosBaseIdPath, pc.handlerGetTodosById)
-	pc.v1.Post(todosBasePath, pc.handlerCreateTodos)
-	pc.v1.Put(todosBaseIdPath, pc.handlerUpdateTodos)
-	pc.v1.Delete(todosBaseIdPath, pc.handlerDeleteTodos)
+	// ---- Photos API
+	pc.v1.Get(PhotosBasePath, pc.middleware.Protected([]uint{}), pc.handlerGetAllPhotos)
+	pc.v1.Get(PhotosBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerGetPhotosById)
+	pc.v1.Post(PhotosBasePath, pc.middleware.Protected([]uint{}), pc.handlerCreatePhotos)
+	pc.v1.Put(PhotosBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerUpdatePhotos)
+	pc.v1.Delete(PhotosBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerDeletePhotos)
+
+	// ---- Comments API
+	pc.v1.Get(CommentsBasePath, pc.middleware.Protected([]uint{}), pc.handlerGetAllComment)
+	pc.v1.Post(CommentsBasePath, pc.middleware.Protected([]uint{}), pc.handlerCreateComment)
+	pc.v1.Put(CommentsBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerUpdateComment)
+	pc.v1.Delete(CommentsBaseIdPath, pc.middleware.Protected([]uint{}), pc.handlerDeleteComment)
 }
